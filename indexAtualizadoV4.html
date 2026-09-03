@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thiago Denipote - Desenvolvedor Power Platform</title>
+<meta name="description" content="Portfólio de Thiago Santana Denipote, desenvolvedor Power Platform especializado em PowerApps, Power Automate, SharePoint e Dataverse.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f8fb;
+    --bg-raised:#ffffff;
+    --bg-card:#ffffff;
+    --border:rgba(15,23,42,0.09);
+    --border-strong:rgba(15,23,42,0.18);
+    --text-1:#14151a;
+    --text-2:#565b66;
+    --text-3:#868b96;
+    --accent:#0066ff;
+    --accent-soft:rgba(0,102,255,0.08);
+    --accent-line:rgba(0,102,255,0.35);
+    --radius:14px;
+    --maxw:1120px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--text-1);
+    font-family:'Source Sans 3', system-ui, sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    background-image:
+      radial-gradient(rgba(15,23,42,0.06) 1px, transparent 1px);
+    background-size:34px 34px;
+    background-position:-10px -10px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, transparent 75%);
+  }
+
+  h1,h2,h3,h4{
+    font-family:'Outfit', sans-serif;
+    font-weight:700;
+    letter-spacing:-0.02em;
+    color:var(--text-1);
+  }
+
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  ul{list-style:none;}
+
+  .wrap{width:100%; max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  section{padding:120px 0;}
+  @media (max-width:720px){ section{padding:84px 0;} }
+
+  .eyebrow{
+    display:flex; align-items:center; gap:12px;
+    font-family:'Outfit', sans-serif;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:28px; height:1px;
+    background:var(--accent-line);
+  }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    border-bottom:1px solid transparent;
+    transition:background-color .35s ease, border-color .35s ease, backdrop-filter .35s ease;
+  }
+  header.nav.scrolled{
+    background:rgba(247,248,251,0.78);
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    border-bottom-color:var(--border);
+  }
+  .nav-inner{
+    max-width:var(--maxw); margin:0 auto; padding:0 28px;
+    height:76px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{
+    font-family:'Outfit', sans-serif;
+    font-weight:700;
+    font-size:17px;
+    color:var(--text-1);
+    display:flex; align-items:center; gap:10px;
+  }
+  .brand .dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 12px var(--accent);
+  }
+  .nav-links{
+    display:flex; align-items:center; gap:36px;
+    font-size:14.5px; font-weight:500; color:var(--text-2);
+  }
+  .nav-links a{
+    position:relative; padding:4px 0;
+    transition:color .2s ease;
+  }
+  .nav-links a:hover{ color:var(--text-1); }
+  .nav-links a:not(.nav-cta)::after{
+    content:""; position:absolute; left:0; bottom:-2px;
+    width:0; height:1px; background:var(--accent);
+    transition:width .25s ease;
+  }
+  .nav-links a:not(.nav-cta):hover::after{ width:100%; }
+  .nav-links a.nav-cta{
+    display:inline-flex; align-items:center;
+    border:1px solid var(--border-strong);
+    padding:10px 22px;
+    line-height:1;
+    border-radius:999px;
+    font-size:14px; font-weight:500;
+    transition:border-color .2s ease, background-color .2s ease;
+  }
+  .nav-links a.nav-cta:hover{ border-color:var(--accent-line); background:var(--accent-soft); }
+  .nav-toggle{ display:none; }
+
+  @media (max-width:760px){
+    .nav-links{
+      position:fixed; top:76px; left:0; right:0;
+      background:rgba(255,255,255,0.98);
+      border-bottom:1px solid var(--border);
+      flex-direction:column; align-items:flex-start;
+      gap:0;
+      max-height:0; overflow:hidden;
+      transition:max-height .3s ease;
+    }
+    .nav-links.open{ max-height:320px; }
+    .nav-links a{ width:100%; padding:16px 28px; }
+    .nav-links a::after{ display:none; }
+    .nav-links a.nav-cta{
+      width:auto;
+      padding:11px 24px;
+      margin:14px 28px 22px;
+    }
+    .nav-toggle{
+      display:flex; flex-direction:column; gap:5px;
+      background:none; border:none; cursor:pointer; padding:8px;
+    }
+    .nav-toggle span{ width:20px; height:1.5px; background:var(--text-1); transition:transform .2s ease, opacity .2s ease; }
+    .nav-toggle.open span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2){ opacity:0; }
+    .nav-toggle.open span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding-top:76px;
+    position:relative;
+  }
+  .hero-kicker{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13px; font-weight:500; color:var(--text-2);
+    border:1px solid var(--border); border-radius:999px;
+    padding:6px 14px; margin-top:32px; margin-bottom:28px;
+    width:fit-content;
+  }
+  .hero-kicker .dot{ width:6px; height:6px; border-radius:50%; background:var(--accent); }
+  .hero h1{
+    font-size:clamp(2.6rem, 6vw, 4.6rem);
+    line-height:1.04;
+    max-width:16ch;
+  }
+  .hero h1 .accent{ color:var(--accent); }
+  .hero .role{
+    margin-top:22px;
+    font-family:'Outfit', sans-serif;
+    font-size:clamp(1.05rem, 2vw, 1.35rem);
+    font-weight:500;
+    color:var(--text-2);
+  }
+  .hero p.lead{
+    margin-top:22px;
+    max-width:58ch;
+    font-size:1.08rem;
+    color:var(--text-2);
+  }
+  .hero-actions{
+    margin-top:44px;
+    display:flex; flex-wrap:wrap; gap:14px;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:9px;
+    padding:13px 24px;
+    border-radius:999px;
+    font-family:'Outfit', sans-serif;
+    font-weight:600; font-size:14.5px;
+    transition:transform .2s ease, border-color .2s ease, background-color .2s ease, box-shadow .2s ease;
+  }
+  .btn svg{ width:16px; height:16px; }
+  .btn-primary{
+    background:var(--accent); color:#ffffff;
+  }
+  .btn-primary:hover{ box-shadow:0 0 0 1px var(--accent), 0 8px 28px -8px var(--accent-line); transform:translateY(-1px); }
+  .btn-ghost{
+    border:1px solid var(--border-strong); color:var(--text-1);
+  }
+  .btn-ghost:hover{ border-color:var(--accent-line); background:var(--accent-soft); transform:translateY(-1px); }
+
+  .hero-meta{
+    margin-top:96px;
+    display:flex; gap:48px; flex-wrap:wrap;
+    border-top:1px solid var(--border);
+    padding-top:28px;
+  }
+  .hero-meta div strong{
+    display:block; font-family:'Outfit',sans-serif;
+    font-size:1.5rem; color:var(--text-1);
+  }
+  .hero-meta div span{ font-size:13px; color:var(--text-3); }
+
+  /* ---------- reveal ---------- */
+  .reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- SOBRE ---------- */
+  .about-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:64px;
+    align-items:start;
+  }
+  @media (max-width:860px){ .about-grid{ grid-template-columns:1fr; gap:40px; } }
+  .about-grid h2{ font-size:clamp(1.8rem,3.4vw,2.4rem); margin-bottom:22px; }
+  .about-grid p{ color:var(--text-2); font-size:1.02rem; margin-bottom:16px; max-width:56ch; }
+
+  .skills-title{
+    font-family:'Outfit',sans-serif; font-size:13px; font-weight:600;
+    letter-spacing:.08em; text-transform:uppercase; color:var(--text-3);
+    margin:36px 0 14px;
+  }
+  .tags{ display:flex; flex-wrap:wrap; gap:10px; }
+  .tag{
+    font-size:13.5px; font-weight:500; color:var(--text-2);
+    border:1px solid var(--border); border-radius:8px;
+    padding:8px 14px;
+    transition:border-color .2s ease, color .2s ease, background-color .2s ease;
+  }
+  .tag:hover{ border-color:var(--accent-line); color:var(--text-1); background:var(--accent-soft); }
+
+  .about-card{
+    background:var(--bg-card); border:1px solid var(--border);
+    border-radius:var(--radius); padding:32px;
+  }
+  .about-card .stat{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:16px 0; border-bottom:1px solid var(--border);
+  }
+  .about-card .stat:last-child{ border-bottom:none; }
+  .about-card .stat span:first-child{ color:var(--text-3); font-size:13.5px; }
+  .about-card .stat span:last-child{ font-family:'Outfit',sans-serif; font-weight:600; color:var(--text-1); }
+
+  /* ---------- PROJETOS ---------- */
+  .projects-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+    margin-top:52px;
+  }
+  @media (max-width:920px){ .projects-grid{ grid-template-columns:1fr; } }
+
+  .project-card{
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:28px;
+    display:flex; flex-direction:column;
+    position:relative;
+    overflow:hidden;
+    transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+  }
+  .project-card::before{
+    content:"";
+    position:absolute; inset:0 0 auto 0; height:3px;
+    background:var(--card-accent, var(--accent));
+  }
+  .project-card:hover{
+    transform:translateY(-5px);
+    border-color:var(--border-strong);
+    box-shadow:0 20px 40px -20px rgba(15,23,42,0.18);
+  }
+  .project-top{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:18px;
+  }
+  .project-icon{
+    width:40px; height:40px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    background:color-mix(in srgb, var(--card-accent, var(--accent)) 14%, transparent);
+    color:var(--card-accent, var(--accent));
+  }
+  .project-icon svg{ width:20px; height:20px; }
+  .status-pill{
+    font-size:11px; font-weight:600; letter-spacing:.05em; text-transform:uppercase;
+    color:var(--text-3);
+    border:1px solid var(--border); border-radius:999px;
+    padding:4px 10px;
+  }
+  .project-card h3{ font-size:1.15rem; margin-bottom:10px; }
+  .project-card p{ color:var(--text-2); font-size:14.5px; flex:1; margin-bottom:20px; }
+  .project-stack{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+  .stack-badge{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:12px; font-weight:500; color:var(--text-2);
+    background:rgba(15,23,42,0.035);
+    border:1px solid var(--border);
+    border-radius:6px; padding:5px 9px;
+  }
+  .stack-badge .lang-dot{ width:8px; height:8px; border-radius:50%; }
+  .project-link{
+    display:inline-flex; align-items:center; gap:7px;
+    width:100%;
+    font-family:'Outfit',sans-serif; font-size:13.5px; font-weight:600;
+    color:var(--text-1); padding-top:14px; border-top:1px solid var(--border);
+    background:none; border-left:none; border-right:none; border-bottom:none;
+    cursor:pointer;
+    transition:color .2s ease, gap .2s ease;
+  }
+  .project-link svg{ width:14px; height:14px; transition:transform .2s ease; }
+  .project-card:hover .project-link{ color:var(--card-accent, var(--accent)); }
+  .project-card:hover .project-link svg{ transform:translate(2px,-2px); }
+
+  /* ---------- EXPERIENCIA ---------- */
+  .timeline{ margin-top:52px; position:relative; }
+  .timeline::before{
+    content:""; position:absolute; left:9px; top:6px; bottom:6px;
+    width:1px; background:linear-gradient(var(--border), var(--border) 90%, transparent);
+  }
+  .tl-item{ position:relative; padding-left:40px; margin-bottom:44px; }
+  .tl-item:last-child{ margin-bottom:0; }
+  .tl-item::before{
+    content:""; position:absolute; left:0; top:4px;
+    width:19px; height:19px; border-radius:50%;
+    background:var(--bg);
+    border:1px solid var(--accent-line);
+  }
+  .tl-item::after{
+    content:""; position:absolute; left:7px; top:11px;
+    width:5px; height:5px; border-radius:50%;
+    background:var(--accent);
+  }
+  .tl-head{
+    display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 16px;
+    margin-bottom:10px;
+  }
+  .tl-head h3{ font-size:1.15rem; }
+  .tl-period{
+    font-size:12.5px; font-weight:600; color:var(--accent);
+    background:var(--accent-soft);
+    border-radius:999px; padding:4px 12px;
+  }
+  .tl-org{ font-size:14.5px; color:var(--text-2); margin-bottom:10px; font-weight:500; }
+  .tl-item p{ color:var(--text-2); font-size:14.5px; max-width:64ch; }
+
+  /* ---------- CONTATO / FOOTER ---------- */
+  .contact-panel{
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:64px 48px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .contact-panel::after{
+    content:"";
+    position:absolute; width:340px; height:340px;
+    background:radial-gradient(circle, var(--accent-soft), transparent 70%);
+    top:-140px; right:-100px;
+    pointer-events:none;
+  }
+  .contact-panel h2{ font-size:clamp(1.8rem,3.6vw,2.6rem); max-width:16ch; margin:0 auto 16px; }
+  .contact-panel p{ color:var(--text-2); max-width:52ch; margin:0 auto 36px; }
+  .contact-actions{ display:flex; justify-content:center; flex-wrap:wrap; gap:14px; }
+
+  footer{
+    padding:56px 0 40px;
+    display:flex; flex-wrap:wrap; gap:20px;
+    align-items:center; justify-content:space-between;
+    border-top:1px solid var(--border);
+    margin-top:40px;
+    color:var(--text-3); font-size:13.5px;
+  }
+  .footer-links{ display:flex; gap:22px; }
+  .footer-links a{ display:flex; align-items:center; gap:7px; color:var(--text-2); transition:color .2s ease; }
+  .footer-links a:hover{ color:var(--accent); }
+  .footer-links svg{ width:15px; height:15px; }
+
+  section#sobre h2, section#experiencia h2, section#projetos h2{
+    font-size:clamp(1.8rem,3.4vw,2.4rem);
+  }
+
+  /* ---------- BACK TO TOP ---------- */
+  .back-to-top{
+    position:fixed; right:24px; bottom:24px; z-index:90;
+    width:46px; height:46px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--bg-raised);
+    border:1px solid var(--border-strong);
+    border-radius:50%;
+    color:var(--text-1);
+    cursor:pointer;
+    box-shadow:0 10px 24px -12px rgba(15,23,42,0.25);
+    opacity:0; visibility:hidden; transform:translateY(10px);
+    transition:opacity .25s ease, transform .25s ease, visibility .25s ease, border-color .2s ease, background-color .2s ease, color .2s ease, bottom .2s ease;
+  }
+  .back-to-top.visible{ opacity:1; visibility:visible; transform:translateY(0); }
+  .back-to-top:hover{ border-color:var(--accent-line); background:var(--accent-soft); color:var(--accent); }
+  .back-to-top svg{ width:19px; height:19px; }
+  @media (max-width:640px){
+    .back-to-top{ right:16px; bottom:16px; width:42px; height:42px; }
+  }
+
+  /* ---------- PROJECT MODAL ---------- */
+  body.modal-locked{ overflow:hidden; }
+  .modal-overlay{
+    position:fixed; inset:0; z-index:900;
+    background:rgba(15,23,42,0.5);
+    backdrop-filter:blur(4px);
+    display:flex; align-items:flex-start; justify-content:center;
+    padding:clamp(1rem, 5vw, 4rem) 1rem;
+    overflow-y:auto;
+    opacity:0; visibility:hidden;
+    transition:opacity .3s ease, visibility .3s ease;
+  }
+  .modal-overlay.open{ opacity:1; visibility:visible; }
+  .modal{
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    max-width:640px; width:100%;
+    padding:clamp(1.75rem, 4vw, 2.75rem);
+    position:relative;
+    transform:translateY(20px) scale(0.98);
+    transition:transform .35s ease;
+    box-shadow:0 40px 80px -30px rgba(15,23,42,0.35);
+  }
+  .modal-overlay.open .modal{ transform:translateY(0) scale(1); }
+  .modal-close{
+    position:absolute; top:1.5rem; right:1.5rem;
+    width:38px; height:38px; border-radius:50%;
+    border:1px solid var(--border-strong);
+    background:none; color:var(--text-1);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition:border-color .2s ease, background-color .2s ease, color .2s ease;
+  }
+  .modal-close:hover{ border-color:var(--accent-line); background:var(--accent-soft); color:var(--accent); }
+  .modal-close svg{ width:16px; height:16px; }
+  .modal-category{
+    display:block;
+    font-family:'Outfit',sans-serif; font-size:12.5px; font-weight:600;
+    letter-spacing:.08em; text-transform:uppercase; color:var(--accent);
+    margin-bottom:10px;
+  }
+  .modal-title{ font-size:clamp(1.3rem,3vw,1.6rem); margin:0 0 24px; padding-right:2rem; }
+  .modal-section{ margin-bottom:22px; }
+  .modal-section h4{
+    font-family:'Outfit',sans-serif; font-size:12.5px; font-weight:600;
+    letter-spacing:.06em; text-transform:uppercase; color:var(--text-3);
+    margin-bottom:8px;
+  }
+  .modal-section p{ color:var(--text-2); font-size:14.5px; }
+  .modal-section ul{ display:flex; flex-direction:column; gap:6px; }
+  .modal-section ul li{
+    position:relative; padding-left:18px;
+    color:var(--text-2); font-size:14.5px;
+  }
+  .modal-section ul li::before{
+    content:""; position:absolute; left:0; top:9px;
+    width:6px; height:6px; border-radius:50%;
+    background:var(--accent);
+  }
+  .modal-stack{ display:flex; flex-wrap:wrap; gap:10px; }
+  .modal-repo{
+    display:inline-flex; align-items:center; gap:7px;
+    font-family:'Outfit',sans-serif; font-size:13.5px; font-weight:600;
+    color:var(--text-2);
+  }
+  .modal-repo svg{ width:14px; height:14px; }
+</style>
+</head>
+<body>
+
+<header class="nav" id="siteNav">
+  <div class="nav-inner">
+    <a href="#top" class="brand"><span class="dot"></span>Thiago Denipote</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#sobre">Sobre</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#experiencia">Experiência</a>
+      <a href="#contato" class="nav-cta">Contato</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div class="hero-kicker"><span class="dot"></span>Aberto a novas conexões</div>
+      <h1>Construo soluções <span class="accent">Power Platform</span> que simplificam o trabalho das equipes.</h1>
+      <p class="role">Thiago Santana Denipote - Desenvolvedor Power Platform</p>
+      <p class="lead">Atuo com PowerApps, Power Automate, SharePoint e Dataverse para transformar processos manuais em aplicações e fluxos automatizados, e para estruturar intranets corporativas em SharePoint que centralizam informação e melhoram a comunicação interna.</p>
+      <div class="hero-actions">
+        <a href="#projetos" class="btn btn-primary">
+          Ver Projetos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/thiago-santana-denipote-98b966211" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+          LinkedIn
+        </a>
+        <a href="#" target="_blank" rel="noopener" class="btn btn-ghost" id="githubLink">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.5 0 12.3c0 5.44 3.44 10.05 8.21 11.68.6.11.82-.27.82-.6v-2.1c-3.34.75-4.04-1.65-4.04-1.65-.55-1.43-1.34-1.82-1.34-1.82-1.09-.77.08-.75.08-.75 1.2.09 1.84 1.27 1.84 1.27 1.07 1.87 2.8 1.33 3.49 1.02.11-.79.42-1.33.76-1.64-2.66-.31-5.47-1.37-5.47-6.08 0-1.34.46-2.44 1.23-3.3-.12-.31-.53-1.57.12-3.28 0 0 1-.33 3.3 1.26a11.2 11.2 0 0 1 6 0c2.28-1.59 3.29-1.26 3.29-1.26.65 1.71.24 2.97.12 3.28.77.86 1.23 1.96 1.23 3.3 0 4.72-2.81 5.76-5.49 6.07.43.38.81 1.14.81 2.31v3.42c0 .33.22.72.83.6C20.57 22.34 24 17.74 24 12.3 24 5.5 18.63 0 12 0z"/></svg>
+          GitHub
+        </a>
+      </div>
+
+      <div class="hero-meta">
+        <div><strong>Power Apps</strong><span>Canvas e Model-driven</span></div>
+        <div><strong>Power Automate</strong><span>Automação de processos</span></div>
+        <div><strong>SharePoint</strong><span>Sites e Intranets</span></div>
+        <div><strong>Dataverse</strong><span>Base de dados</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="reveal">
+          <div class="eyebrow">Sobre mim</div>
+          <h2>Do processo manual à solução integrada.</h2>
+          <p>Sou desenvolvedor focado no ecossistema Microsoft Power Platform, trabalhando na criação de aplicativos corporativos, automações e portais de intranet que reduzem retrabalho e dão visibilidade a processos que antes viviam em planilhas e e-mails.</p>
+          <p>Gosto de traduzir necessidades de áreas de negócio em soluções de baixo código bem estruturadas - com atenção à governança, à experiência do usuário final e à manutenibilidade do que é entregue, do protótipo em Canvas Apps à publicação em produção.</p>
+
+          <div class="skills-title">Competências técnicas</div>
+          <div class="tags">
+            <span class="tag">Power Apps (Canvas)</span>
+            <span class="tag">Power Apps (Model-Driven)</span>
+            <span class="tag">Power Automate</span>
+            <span class="tag">SharePoint Online</span>
+            <span class="tag">Dataverse</span>
+            <span class="tag">Power Fx</span>
+            <span class="tag">Power BI</span>
+            <span class="tag">PnP PowerShell</span>
+            <span class="tag">Azure Logic Apps</span>
+            <span class="tag">REST APIs / Conectores</span>
+            <span class="tag">Governança &amp; ALM</span>
+          </div>
+        </div>
+
+        <div class="about-card reveal">
+          <div class="stat"><span>Foco principal</span><span>Power Platform</span></div>
+          <div class="stat"><span>Especialidade</span><span>PowerApps e Automate</span></div>
+          <div class="stat"><span>Também atuo em</span><span>Intranets SharePoint</span></div>
+          <div class="stat"><span>Modelo de trabalho</span><span>Remoto</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projetos">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow">Projetos</div>
+        <h2>Repositórios em construção.</h2>
+      </div>
+
+      <div class="projects-grid">
+
+        <article class="project-card reveal" style="--card-accent:#742774;" data-project="powerapps">
+          <div class="project-top">
+            <div class="project-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 12h8M8 8h5M8 16h4"/></svg>
+            </div>
+            <span class="status-pill">Em construção</span>
+          </div>
+          <h3>Projeto Power Apps 01</h3>
+          <p>Aplicativo Canvas em desenvolvimento para digitalizar um processo interno hoje conduzido em planilhas, com formulários dinâmicos e integração ao Dataverse.</p>
+          <div class="project-stack">
+            <span class="stack-badge"><span class="lang-dot" style="background:#742774;"></span>Power Fx</span>
+            <span class="stack-badge"><span class="lang-dot" style="background:#8a8f98;"></span>Dataverse</span>
+            <span class="stack-badge"><span class="lang-dot" style="background:#038387;"></span>SharePoint</span>
+          </div>
+          <button type="button" class="project-link" data-open="powerapps">
+            Ver detalhes
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </button>
+        </article>
+
+        <article class="project-card reveal" style="--card-accent:#0066ff;" data-project="automate">
+          <div class="project-top">
+            <div class="project-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h6l2-4 4 8 2-4h2"/></svg>
+            </div>
+            <span class="status-pill">Em construção</span>
+          </div>
+          <h3>Projeto Power Automate 02</h3>
+          <p>Fluxo de automação em desenvolvimento para aprovações e notificações entre SharePoint e Teams, eliminando o acompanhamento manual por e-mail.</p>
+          <div class="project-stack">
+            <span class="stack-badge"><span class="lang-dot" style="background:#0066ff;"></span>Power Automate</span>
+            <span class="stack-badge"><span class="lang-dot" style="background:#8a8f98;"></span>SharePoint</span>
+          </div>
+          <button type="button" class="project-link" data-open="automate">
+            Ver detalhes
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </button>
+        </article>
+
+        <article class="project-card reveal" style="--card-accent:#038387;" data-project="sharepoint">
+          <div class="project-top">
+            <div class="project-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+            </div>
+            <span class="status-pill">Em construção</span>
+          </div>
+          <h3>Intranet SharePoint 03</h3>
+          <p>Portal de intranet em desenvolvimento com páginas modernas de SharePoint e navegação centralizada por departamento.</p>
+          <div class="project-stack">
+            <span class="stack-badge"><span class="lang-dot" style="background:#038387;"></span>SharePoint</span>
+          </div>
+          <button type="button" class="project-link" data-open="sharepoint">
+            Ver detalhes
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </button>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="experiencia">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow">Experiência</div>
+        <h2>Trajetória profissional.</h2>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="tl-head">
+            <h3>Desenvolvedor Power Platform</h3>
+            <span class="tl-period">Atual</span>
+          </div>
+          <div class="tl-org">Substitua pelo nome da empresa</div>
+          <p>Desenvolvimento de aplicativos em Power Apps, automações em Power Automate e páginas de SharePoint para atender demandas de diferentes áreas de negócio, do levantamento de requisitos à publicação em produção.</p>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-head">
+            <h3>Analista / Desenvolvedor de Sistemas</h3>
+            <span class="tl-period">Período anterior</span>
+          </div>
+          <div class="tl-org">Substitua pelo nome da empresa</div>
+          <p>Suporte e evolução de soluções corporativas, com foco em levantamento de requisitos, modelagem de dados e integração entre sistemas internos.</p>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-head">
+            <h3>Formação complementar</h3>
+            <span class="tl-period">Certificações</span>
+          </div>
+          <div class="tl-org">Substitua pelas certificações / formação</div>
+          <p>Espaço reservado para certificações Microsoft (ex. PL-100, PL-200, PL-400) e demais formações relevantes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="wrap">
+      <div class="contact-panel reveal">
+        <div class="eyebrow" style="justify-content:center;">Contato</div>
+        <h2>Vamos conversar sobre o seu próximo projeto.</h2>
+        <p>Estou aberto a novas oportunidades e colaborações envolvendo Power Apps, Power Automate, SharePoint e Dataverse. Entre em contato pelos canais abaixo.</p>
+        <div class="contact-actions">
+          <a href="mailto:thiagosdenipote@gmail.com" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            Enviar e-mail
+          </a>
+          <a href="https://www.linkedin.com/in/thiago-santana-denipote-98b966211" target="_blank" rel="noopener" class="btn btn-ghost">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; flex-wrap:wrap; gap:20px; align-items:center; justify-content:space-between; width:100%;">
+    <span>&copy; <span id="year"></span> Thiago Santana Denipote. Todos os direitos reservados.</span>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/thiago-santana-denipote-98b966211" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+        LinkedIn
+      </a>
+      <a href="#" target="_blank" rel="noopener" class="github-repo-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.5 0 12.3c0 5.44 3.44 10.05 8.21 11.68.6.11.82-.27.82-.6v-2.1c-3.34.75-4.04-1.65-4.04-1.65-.55-1.43-1.34-1.82-1.34-1.82-1.09-.77.08-.75.08-.75 1.2.09 1.84 1.27 1.84 1.27 1.07 1.87 2.8 1.33 3.49 1.02.11-.79.42-1.33.76-1.64-2.66-.31-5.47-1.37-5.47-6.08 0-1.34.46-2.44 1.23-3.3-.12-.31-.53-1.57.12-3.28 0 0 1-.33 3.3 1.26a11.2 11.2 0 0 1 6 0c2.28-1.59 3.29-1.26 3.29-1.26.65 1.71.24 2.97.12 3.28.77.86 1.23 1.96 1.23 3.3 0 4.72-2.81 5.76-5.49 6.07.43.38.81 1.14.81 2.31v3.42c0 .33.22.72.83.6C20.57 22.34 24 17.74 24 12.3 24 5.5 18.63 0 12 0z"/></svg>
+        GitHub
+      </a>
+      <a href="mailto:thiagosdenipote@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        E-mail
+      </a>
+    </div>
+  </div>
+</footer>
+
+<button id="backToTop" class="back-to-top" aria-label="Voltar ao topo">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" id="modal">
+    <button class="modal-close" id="modalClose" aria-label="Fechar detalhes do projeto">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <span class="modal-category" id="modalCategory"></span>
+    <h3 class="modal-title" id="modalTitle"></h3>
+    <div class="modal-section">
+      <h4>Contexto</h4>
+      <p id="modalContext"></p>
+    </div>
+    <div class="modal-section">
+      <h4>Problema</h4>
+      <p id="modalProblem"></p>
+    </div>
+    <div class="modal-section">
+      <h4>Solução</h4>
+      <p id="modalSolution"></p>
+    </div>
+    <div class="modal-section">
+      <h4>Principais funcionalidades</h4>
+      <ul id="modalFeatures"></ul>
+    </div>
+    <div class="modal-section">
+      <h4>Tecnologias</h4>
+      <div class="modal-stack" id="modalStack"></div>
+    </div>
+    <div class="modal-section">
+      <h4>Resultado esperado</h4>
+      <p id="modalResult"></p>
+    </div>
+    <a href="#" target="_blank" rel="noopener" class="modal-repo github-repo-link">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.5 0 12.3c0 5.44 3.44 10.05 8.21 11.68.6.11.82-.27.82-.6v-2.1c-3.34.75-4.04-1.65-4.04-1.65-.55-1.43-1.34-1.82-1.34-1.82-1.09-.77.08-.75.08-.75 1.2.09 1.84 1.27 1.84 1.27 1.07 1.87 2.8 1.33 3.49 1.02.11-.79.42-1.33.76-1.64-2.66-.31-5.47-1.37-5.47-6.08 0-1.34.46-2.44 1.23-3.3-.12-.31-.53-1.57.12-3.28 0 0 1-.33 3.3 1.26a11.2 11.2 0 0 1 6 0c2.28-1.59 3.29-1.26 3.29-1.26.65 1.71.24 2.97.12 3.28.77.86 1.23 1.96 1.23 3.3 0 4.72-2.81 5.76-5.49 6.07.43.38.81 1.14.81 2.31v3.42c0 .33.22.72.83.6C20.57 22.34 24 17.74 24 12.3 24 5.5 18.63 0 12 0z"/></svg>
+      Repositório no GitHub (em construção)
+    </a>
+  </div>
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Navbar blur on scroll
+  const nav = document.getElementById('siteNav');
+  const onScroll = () => {
+    if (window.scrollY > 12) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Mobile menu toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', false);
+  }));
+
+  // Scroll-reveal animations
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach(el => io.observe(el));
+
+  // Back to top button
+  const backToTop = document.getElementById('backToTop');
+  const siteFooter = document.querySelector('footer');
+  const onScrollTop = () => {
+    backToTop.classList.toggle('visible', window.scrollY > 480);
+    const footerRect = siteFooter.getBoundingClientRect();
+    const overlap = window.innerHeight - footerRect.top;
+    backToTop.style.bottom = overlap > 0 ? (overlap + 16) + 'px' : '';
+  };
+  onScrollTop();
+  window.addEventListener('scroll', onScrollTop, { passive: true });
+  window.addEventListener('resize', onScrollTop);
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Project detail modal
+  const projectData = {
+    powerapps: {
+      category: 'Power Apps · Canvas',
+      title: 'Projeto Power Apps 01',
+      context: 'Substitua por um resumo real do cenário: qual área da empresa e qual processo hoje é feito em planilhas ou formulários manuais.',
+      problem: 'Substitua pela dor concreta do processo atual: retrabalho, falta de rastreabilidade, tempo perdido, erros de digitação etc.',
+      solution: 'Substitua pela descrição da solução construída em Power Apps: telas principais, lógica em Power Fx e como o Dataverse organiza os dados.',
+      features: [
+        'Formulários dinâmicos com validação de campos',
+        'Integração com Dataverse para persistência dos dados',
+        'Permissões de acesso por perfil de usuário'
+      ],
+      stack: ['Power Apps', 'Power Fx', 'Dataverse', 'SharePoint'],
+      result: 'Substitua pelo resultado alcançado (ou esperado): tempo economizado, redução de erros, adoção pelas equipes.'
+    },
+    automate: {
+      category: 'Power Automate · Fluxo',
+      title: 'Projeto Power Automate 02',
+      context: 'Substitua por um resumo real do cenário: qual aprovação ou notificação hoje depende de e-mail e acompanhamento manual.',
+      problem: 'Substitua pela dor concreta: atrasos nas aprovações, falta de visibilidade do status, comunicação dispersa entre times.',
+      solution: 'Substitua pela descrição do fluxo automatizado: gatilhos, etapas de aprovação e como SharePoint e Teams se conectam.',
+      features: [
+        'Disparo automático a partir de itens do SharePoint',
+        'Notificações e aprovações direto no Teams',
+        'Histórico centralizado do status de cada solicitação'
+      ],
+      stack: ['Power Automate', 'SharePoint', 'Microsoft Teams'],
+      result: 'Substitua pelo resultado alcançado (ou esperado): redução do tempo de aprovação, menos acompanhamento manual.'
+    },
+    sharepoint: {
+      category: 'SharePoint · Intranet',
+      title: 'Intranet SharePoint 03',
+      context: 'Substitua por um resumo real do cenário: como a comunicação interna e o acesso à informação funcionam hoje na empresa.',
+      problem: 'Substitua pela dor concreta: informação espalhada, dificuldade de encontrar comunicados, navegação confusa entre departamentos.',
+      solution: 'Substitua pela descrição do portal: estrutura de páginas modernas do SharePoint e organização da navegação por departamento.',
+      features: [
+        'Páginas modernas por departamento',
+        'Navegação centralizada e busca de conteúdo',
+        'Publicação de comunicados e documentos institucionais'
+      ],
+      stack: ['SharePoint', 'Power Automate'],
+      result: 'Substitua pelo resultado alcançado (ou esperado): mais facilidade para encontrar informação, comunicação interna mais consistente.'
+    }
+  };
+
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modal = document.getElementById('modal');
+  const modalClose = document.getElementById('modalClose');
+  let lastFocusedEl = null;
+
+  function fillModal(data) {
+    document.getElementById('modalCategory').textContent = data.category;
+    document.getElementById('modalTitle').textContent = data.title;
+    document.getElementById('modalContext').textContent = data.context;
+    document.getElementById('modalProblem').textContent = data.problem;
+    document.getElementById('modalSolution').textContent = data.solution;
+    document.getElementById('modalResult').textContent = data.result;
+
+    const featuresList = document.getElementById('modalFeatures');
+    featuresList.innerHTML = '';
+    data.features.forEach((feature) => {
+      const li = document.createElement('li');
+      li.textContent = feature;
+      featuresList.appendChild(li);
+    });
+
+    const stackWrap = document.getElementById('modalStack');
+    stackWrap.innerHTML = '';
+    data.stack.forEach((tech) => {
+      const span = document.createElement('span');
+      span.className = 'tag';
+      span.textContent = tech;
+      stackWrap.appendChild(span);
+    });
+  }
+
+  function getFocusable() {
+    return modal.querySelectorAll('button, a[href]');
+  }
+
+  function handleModalKeydown(e) {
+    if (e.key === 'Escape') {
+      closeModal();
+      return;
+    }
+    if (e.key === 'Tab') {
+      const focusable = getFocusable();
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }
+
+  function openModal(key) {
+    const data = projectData[key];
+    if (!data) return;
+    fillModal(data);
+    lastFocusedEl = document.activeElement;
+    modalOverlay.classList.add('open');
+    modalOverlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-locked');
+    modalClose.focus();
+    document.addEventListener('keydown', handleModalKeydown);
+  }
+
+  function closeModal() {
+    modalOverlay.classList.remove('open');
+    modalOverlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-locked');
+    document.removeEventListener('keydown', handleModalKeydown);
+    if (lastFocusedEl) lastFocusedEl.focus();
+  }
+
+  document.querySelectorAll('[data-open]').forEach((btn) => {
+    btn.addEventListener('click', () => openModal(btn.getAttribute('data-open')));
+  });
+  modalClose.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) closeModal();
+  });
+</script>
+
+</body>
+</html>
